@@ -1,0 +1,10 @@
+#################################################
+# copy static pods cfgs
+#################################################
+---
+
+- name: Copy prometheus static pod config
+  copy: src=prometheus-static.yml dest=/etc/kubernetes/manifests owner=root group=root mode=0640
+
+- name: Copy prometheus static pod config
+  copy: src=grafana-static.yml dest=/etc/kubernetes/manifests owner=root group=root mode=0640

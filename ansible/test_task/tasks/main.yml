@@ -1,0 +1,5 @@
+---
+  - import_tasks: 00-install-docker.yml
+  - import_tasks: 10-install-kubelet.yml
+  - import_tasks: 20-copy-files.yml
+  - import_tasks: 30-create-static-pods.yml

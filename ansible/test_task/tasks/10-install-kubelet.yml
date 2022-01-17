@@ -1,0 +1,25 @@
+#################################################
+# kubelet install & configure
+#################################################
+---
+
+- name: Add kubelet GPG key
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: Add k8s Repository
+  apt_repository:
+    repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+    state: present
+
+- name: Install kubelet
+  apt: name=kubelet state=present update_cache=yes
+
+- name: Hold kubelet
+  dpkg_selections: name=kubelet selection=hold
+
+- name: Copy systemd unit file
+  copy: src=kubelet.service dest=/etc/systemd/system/kubelet.service owner=root group=root mode=0640
+  notify:
+    - reload systemctl

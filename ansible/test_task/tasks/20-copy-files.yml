@@ -1,0 +1,15 @@
+#################################################
+# create dir and copy files
+#################################################
+---
+
+- name: Creates files directory
+  file:
+    path: /tmp/test_task/files
+    state: directory
+
+- name: Copy prometheus instance config file
+  copy: src=prometheus.yml dest=/tmp/test_task/files  owner=root group=root mode=0644
+
+- name: Copy grafana instance config file
+  copy: src=grafana-datasource.yml dest=/tmp/test_task/files owner=root group=root mode=0644

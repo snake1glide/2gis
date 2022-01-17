@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: prometheus
+  labels:
+    app: staticpod
+spec:
+  hostNetwork: true
+  containers:
+    - name: prometheus
+      image: prom/prometheus
+      volumeMounts:
+      - mountPath: /etc/prometheus/prometheus.yml
+        name: prometheus-file
+      ports:
+        - name: prom
+          containerPort: 9090
+          protocol: TCP
+  volumes:
+    - name: prometheus-file
+      hostPath:
+        path: /tmp/test_task/files/prometheus.yml
+        type: FileOrCreate
